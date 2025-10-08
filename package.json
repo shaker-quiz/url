@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "@shakerquiz/url",
+  "version": "0.0.0",
+  "author": "yurkimus <yurkimus@gmail.com>",
+  "license": "ISC",
+  "exports": {
+    "./admin": "./source/admin/index.js",
+    "./checkin": "./source/checkin/index.js",
+    "./cities": "./source/cities/index.js",
+    "./files": "./source/files/index.js",
+    "./games": "./source/games/index.js",
+    "./integrations": "./source/integrations/index.js",
+    "./landing": "./source/landing/index.js",
+    "./locations": "./source/locations/index.js",
+    "./procedures": "./source/procedures/index.js",
+    "./registrations": "./source/registrations/index.js",
+    "./roles": "./source/roles/index.js",
+    "./themes": "./source/themes/index.js",
+    "./updates": "./source/updates/index.js",
+    "./users": "./source/users/index.js",
+    "./venues": "./source/venues/index.js",
+    "./vk": "./source/vk/index.js"
+  }
+}
