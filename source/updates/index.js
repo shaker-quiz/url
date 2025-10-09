@@ -49,6 +49,21 @@ export var ServiceNetworkOrigin = {
     'Public': new URL(process.env.FILES_PUBLIC_ORIGIN),
   },
 
+  'Integrations': {
+    'Docker': new URL(process.env.INTEGRATIONS_DOCKER_ORIGIN),
+    'Public': new URL(process.env.INTEGRATIONS_PUBLIC_ORIGIN),
+  },
+
+  'Updates': {
+    'Docker': new URL(process.env.UPDATES_DOCKER_ORIGIN),
+    'Public': new URL(process.env.UPDATES_PUBLIC_ORIGIN),
+  },
+
+  'Procedures': {
+    'Docker': new URL(process.env.PROCEDURES_DOCKER_ORIGIN),
+    'Public': new URL(process.env.PROCEDURES_PUBLIC_ORIGIN),
+  },
+
   'Minio': {
     'Docker': new URL(process.env.MINIO_DOCKER_ORIGIN),
     'Public': new URL(process.env.MINIO_PUBLIC_ORIGIN),

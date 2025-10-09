@@ -49,6 +49,21 @@ export var ServiceNetworkOrigin = {
     'Public': new URL(import.meta.env.VITE_FILES_PUBLIC_ORIGIN),
   },
 
+  'Integrations': {
+    'Docker': new URL(import.meta.env.VITE_INTEGRATIONS_DOCKER_ORIGIN),
+    'Public': new URL(import.meta.env.VITE_INTEGRATIONS_PUBLIC_ORIGIN),
+  },
+
+  'Updates': {
+    'Docker': new URL(import.meta.env.VITE_UPDATES_DOCKER_ORIGIN),
+    'Public': new URL(import.meta.env.VITE_UPDATES_PUBLIC_ORIGIN),
+  },
+
+  'Procedures': {
+    'Docker': new URL(import.meta.env.VITE_PROCEDURES_DOCKER_ORIGIN),
+    'Public': new URL(import.meta.env.VITE_PROCEDURES_PUBLIC_ORIGIN),
+  },
+
   'Minio': {
     'Docker': new URL(import.meta.env.VITE_MINIO_DOCKER_ORIGIN),
     'Public': new URL(import.meta.env.VITE_MINIO_PUBLIC_ORIGIN),

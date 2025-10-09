@@ -49,6 +49,21 @@ export var ServiceNetworkOrigin = {
     'Public': new URL(Deno.env.get('FILES_PUBLIC_ORIGIN')),
   },
 
+  'Integrations': {
+    'Docker': new URL(Deno.env.get('INTEGRATIONS_DOCKER_ORIGIN')),
+    'Public': new URL(Deno.env.get('INTEGRATIONS_PUBLIC_ORIGIN')),
+  },
+
+  'Updates': {
+    'Docker': new URL(Deno.env.get('UPDATES_DOCKER_ORIGIN')),
+    'Public': new URL(Deno.env.get('UPDATES_PUBLIC_ORIGIN')),
+  },
+
+  'Procedures': {
+    'Docker': new URL(Deno.env.get('PROCEDURES_DOCKER_ORIGIN')),
+    'Public': new URL(Deno.env.get('PROCEDURES_PUBLIC_ORIGIN')),
+  },
+
   'Minio': {
     'Docker': new URL(Deno.env.get('MINIO_DOCKER_ORIGIN')),
     'Public': new URL(Deno.env.get('MINIO_PUBLIC_ORIGIN')),
