@@ -1,86 +1,86 @@
 export var ServiceNetworkOrigin = {
   'Roles': {
-    'Docker': new URL(process.env.ROLES_DOCKER_ORIGIN),
-    'Public': new URL(process.env.ROLES_PUBLIC_ORIGIN),
+    'Docker': process.env.ROLES_DOCKER_ORIGIN,
+    'Public': process.env.ROLES_PUBLIC_ORIGIN,
   },
 
   'Users': {
-    'Docker': new URL(process.env.USERS_DOCKER_ORIGIN),
-    'Public': new URL(process.env.USERS_PUBLIC_ORIGIN),
+    'Docker': process.env.USERS_DOCKER_ORIGIN,
+    'Public': process.env.USERS_PUBLIC_ORIGIN,
   },
 
   'Checkin': {
-    'Docker': new URL(process.env.CHECKIN_DOCKER_ORIGIN),
-    'Public': new URL(process.env.CHECKIN_PUBLIC_ORIGIN),
+    'Docker': process.env.CHECKIN_DOCKER_ORIGIN,
+    'Public': process.env.CHECKIN_PUBLIC_ORIGIN,
   },
 
   'Locations': {
-    'Docker': new URL(process.env.LOCATIONS_DOCKER_ORIGIN),
-    'Public': new URL(process.env.LOCATIONS_PUBLIC_ORIGIN),
+    'Docker': process.env.LOCATIONS_DOCKER_ORIGIN,
+    'Public': process.env.LOCATIONS_PUBLIC_ORIGIN,
   },
 
   'Cities': {
-    'Docker': new URL(process.env.CITIES_DOCKER_ORIGIN),
-    'Public': new URL(process.env.CITIES_PUBLIC_ORIGIN),
+    'Docker': process.env.CITIES_DOCKER_ORIGIN,
+    'Public': process.env.CITIES_PUBLIC_ORIGIN,
   },
 
   'Venues': {
-    'Docker': new URL(process.env.VENUES_DOCKER_ORIGIN),
-    'Public': new URL(process.env.VENUES_PUBLIC_ORIGIN),
+    'Docker': process.env.VENUES_DOCKER_ORIGIN,
+    'Public': process.env.VENUES_PUBLIC_ORIGIN,
   },
 
   'Themes': {
-    'Docker': new URL(process.env.THEMES_DOCKER_ORIGIN),
-    'Public': new URL(process.env.THEMES_PUBLIC_ORIGIN),
+    'Docker': process.env.THEMES_DOCKER_ORIGIN,
+    'Public': process.env.THEMES_PUBLIC_ORIGIN,
   },
 
   'Games': {
-    'Docker': new URL(process.env.GAMES_DOCKER_ORIGIN),
-    'Public': new URL(process.env.GAMES_PUBLIC_ORIGIN),
+    'Docker': process.env.GAMES_DOCKER_ORIGIN,
+    'Public': process.env.GAMES_PUBLIC_ORIGIN,
   },
 
   'Registrations': {
-    'Docker': new URL(process.env.REGISTRATIONS_DOCKER_ORIGIN),
-    'Public': new URL(process.env.REGISTRATIONS_PUBLIC_ORIGIN),
+    'Docker': process.env.REGISTRATIONS_DOCKER_ORIGIN,
+    'Public': process.env.REGISTRATIONS_PUBLIC_ORIGIN,
   },
 
   'Files': {
-    'Docker': new URL(process.env.FILES_DOCKER_ORIGIN),
-    'Public': new URL(process.env.FILES_PUBLIC_ORIGIN),
+    'Docker': process.env.FILES_DOCKER_ORIGIN,
+    'Public': process.env.FILES_PUBLIC_ORIGIN,
   },
 
   'Integrations': {
-    'Docker': new URL(process.env.INTEGRATIONS_DOCKER_ORIGIN),
-    'Public': new URL(process.env.INTEGRATIONS_PUBLIC_ORIGIN),
+    'Docker': process.env.INTEGRATIONS_DOCKER_ORIGIN,
+    'Public': process.env.INTEGRATIONS_PUBLIC_ORIGIN,
   },
 
   'Updates': {
-    'Docker': new URL(process.env.UPDATES_DOCKER_ORIGIN),
-    'Public': new URL(process.env.UPDATES_PUBLIC_ORIGIN),
+    'Docker': process.env.UPDATES_DOCKER_ORIGIN,
+    'Public': process.env.UPDATES_PUBLIC_ORIGIN,
   },
 
   'Procedures': {
-    'Docker': new URL(process.env.PROCEDURES_DOCKER_ORIGIN),
-    'Public': new URL(process.env.PROCEDURES_PUBLIC_ORIGIN),
+    'Docker': process.env.PROCEDURES_DOCKER_ORIGIN,
+    'Public': process.env.PROCEDURES_PUBLIC_ORIGIN,
   },
 
   'Minio': {
-    'Docker': new URL(process.env.MINIO_DOCKER_ORIGIN),
-    'Public': new URL(process.env.MINIO_PUBLIC_ORIGIN),
+    'Docker': process.env.MINIO_DOCKER_ORIGIN,
+    'Public': process.env.MINIO_PUBLIC_ORIGIN,
   },
 
   'Landing': {
-    'Docker': new URL(process.env.LANDING_DOCKER_ORIGIN),
-    'Public': new URL(process.env.LANDING_PUBLIC_ORIGIN),
+    'Docker': process.env.LANDING_DOCKER_ORIGIN,
+    'Public': process.env.LANDING_PUBLIC_ORIGIN,
   },
 
   'Vk': {
-    'Docker': new URL(process.env.VK_DOCKER_ORIGIN),
-    'Public': new URL(process.env.VK_PUBLIC_ORIGIN),
+    'Docker': process.env.VK_DOCKER_ORIGIN,
+    'Public': process.env.VK_PUBLIC_ORIGIN,
   },
 
   'Hub': {
-    'Docker': new URL(process.env.HUB_DOCKER_ORIGIN),
-    'Public': new URL(process.env.HUB_PUBLIC_ORIGIN),
+    'Docker': process.env.HUB_DOCKER_ORIGIN,
+    'Public': process.env.HUB_PUBLIC_ORIGIN,
   },
 }
