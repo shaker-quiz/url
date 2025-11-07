@@ -1,4 +1,4 @@
-import { guardNetwork, guardRouteService, guardService, hydrateRoutePathname, Network, Service } from '@shakerquiz/utilities'
+import { guardKey, hydrateRoutePathname, Network, Route, RouteService, Service } from '@shakerquiz/utilities'
 
 export var ServiceNetworkOrigin = {
   [Service['Roles']]: {
@@ -96,9 +96,9 @@ export var ServiceNetworkOrigin = {
  * @returns {string}
  */
 export var guardOrigin = (maybeService, maybeNetwork) => {
-  var service = guardService(maybeService)
+  var service = guardKey(Service, maybeService)
 
-  var network = guardNetwork(maybeNetwork)
+  var network = guardKey(Network, maybeNetwork)
 
   if (!(service in ServiceNetworkOrigin))
     throw TypeError(`Service '${service}' does not exist.`)
@@ -110,9 +110,11 @@ export var guardOrigin = (maybeService, maybeNetwork) => {
 }
 
 export var routeRequest = (maybeNetwork, maybeRoute, maybeRouteParams, maybeRouteSearch, init) => {
+  var route = guardKey(Route, maybeRoute)
+
   var url = new URL(
-    hydrateRoutePathname(maybeRoute, maybeRouteParams),
-    guardOrigin(guardRouteService(guardRoute(maybeRoute)), guardNetwork(maybeNetwork)),
+    hydrateRoutePathname(route, maybeRouteParams),
+    guardOrigin(guardKey(RouteService, route), guardKey(Network, maybeNetwork)),
   )
 
   url.search = maybeRouteSearch
