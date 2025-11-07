@@ -1,86 +1,121 @@
+import { guardNetwork, guardRouteService, guardService, hydrateRoutePathname, Network, Service } from '@shakerquiz/utilities'
+
 export var ServiceNetworkOrigin = {
-  'Roles': {
-    'Docker': Deno.env.get('ROLES_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('ROLES_PUBLIC_ORIGIN'),
+  [Service['Roles']]: {
+    [Network['Docker']]: Deno.env.get('ROLES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('ROLES_PUBLIC_ORIGIN'),
   },
 
-  'Users': {
-    'Docker': Deno.env.get('USERS_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('USERS_PUBLIC_ORIGIN'),
+  [Service['Users']]: {
+    [Network['Docker']]: Deno.env.get('USERS_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('USERS_PUBLIC_ORIGIN'),
   },
 
-  'Checkin': {
-    'Docker': Deno.env.get('CHECKIN_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('CHECKIN_PUBLIC_ORIGIN'),
+  [Service['Checkin']]: {
+    [Network['Docker']]: Deno.env.get('CHECKIN_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('CHECKIN_PUBLIC_ORIGIN'),
   },
 
-  'Locations': {
-    'Docker': Deno.env.get('LOCATIONS_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('LOCATIONS_PUBLIC_ORIGIN'),
+  [Service['Locations']]: {
+    [Network['Docker']]: Deno.env.get('LOCATIONS_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('LOCATIONS_PUBLIC_ORIGIN'),
   },
 
-  'Cities': {
-    'Docker': Deno.env.get('CITIES_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('CITIES_PUBLIC_ORIGIN'),
+  [Service['Cities']]: {
+    [Network['Docker']]: Deno.env.get('CITIES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('CITIES_PUBLIC_ORIGIN'),
   },
 
-  'Venues': {
-    'Docker': Deno.env.get('VENUES_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('VENUES_PUBLIC_ORIGIN'),
+  [Service['Venues']]: {
+    [Network['Docker']]: Deno.env.get('VENUES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('VENUES_PUBLIC_ORIGIN'),
   },
 
-  'Themes': {
-    'Docker': Deno.env.get('THEMES_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('THEMES_PUBLIC_ORIGIN'),
+  [Service['Themes']]: {
+    [Network['Docker']]: Deno.env.get('THEMES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('THEMES_PUBLIC_ORIGIN'),
   },
 
-  'Games': {
-    'Docker': Deno.env.get('GAMES_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('GAMES_PUBLIC_ORIGIN'),
+  [Service['Games']]: {
+    [Network['Docker']]: Deno.env.get('GAMES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('GAMES_PUBLIC_ORIGIN'),
   },
 
-  'Registrations': {
-    'Docker': Deno.env.get('REGISTRATIONS_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('REGISTRATIONS_PUBLIC_ORIGIN'),
+  [Service['Registrations']]: {
+    [Network['Docker']]: Deno.env.get('REGISTRATIONS_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('REGISTRATIONS_PUBLIC_ORIGIN'),
   },
 
-  'Files': {
-    'Docker': Deno.env.get('FILES_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('FILES_PUBLIC_ORIGIN'),
+  [Service['Files']]: {
+    [Network['Docker']]: Deno.env.get('FILES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('FILES_PUBLIC_ORIGIN'),
   },
 
-  'Integrations': {
-    'Docker': Deno.env.get('INTEGRATIONS_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('INTEGRATIONS_PUBLIC_ORIGIN'),
+  [Service['Integrations']]: {
+    [Network['Docker']]: Deno.env.get('INTEGRATIONS_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('INTEGRATIONS_PUBLIC_ORIGIN'),
   },
 
-  'Updates': {
-    'Docker': Deno.env.get('UPDATES_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('UPDATES_PUBLIC_ORIGIN'),
+  [Service['Updates']]: {
+    [Network['Docker']]: Deno.env.get('UPDATES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('UPDATES_PUBLIC_ORIGIN'),
   },
 
-  'Procedures': {
-    'Docker': Deno.env.get('PROCEDURES_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('PROCEDURES_PUBLIC_ORIGIN'),
+  [Service['Procedures']]: {
+    [Network['Docker']]: Deno.env.get('PROCEDURES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('PROCEDURES_PUBLIC_ORIGIN'),
   },
 
-  'Minio': {
-    'Docker': Deno.env.get('MINIO_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('MINIO_PUBLIC_ORIGIN'),
+  [Service['Minio']]: {
+    [Network['Docker']]: Deno.env.get('MINIO_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('MINIO_PUBLIC_ORIGIN'),
   },
 
-  'Landing': {
-    'Docker': Deno.env.get('LANDING_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('LANDING_PUBLIC_ORIGIN'),
+  [Service['Landing']]: {
+    [Network['Docker']]: Deno.env.get('LANDING_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('LANDING_PUBLIC_ORIGIN'),
   },
 
-  'Vk': {
-    'Docker': Deno.env.get('VK_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('VK_PUBLIC_ORIGIN'),
+  [Service['Vkma']]: {
+    [Network['Docker']]: Deno.env.get('VKMA_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('VKMA_PUBLIC_ORIGIN'),
   },
 
-  'Hub': {
-    'Docker': Deno.env.get('HUB_DOCKER_ORIGIN'),
-    'Public': Deno.env.get('HUB_PUBLIC_ORIGIN'),
+  [Service['Hub']]: {
+    [Network['Docker']]: Deno.env.get('HUB_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('HUB_PUBLIC_ORIGIN'),
   },
+
+  [Service['Minio']]: {
+    [Network['Docker']]: Deno.env.get('MINIO_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('MINIO_PUBLIC_ORIGIN'),
+  },
+}
+
+/**
+ * @returns {string}
+ */
+export var guardOrigin = (maybeService, maybeNetwork) => {
+  var service = guardService(maybeService)
+
+  var network = guardNetwork(maybeNetwork)
+
+  if (!(service in ServiceNetworkOrigin))
+    throw TypeError(`Service '${service}' does not exist.`)
+
+  if (!(network in ServiceNetworkOrigin[service]))
+    throw TypeError(`Network '${network}' in Service '${service}' does not exist.`)
+
+  return ServiceNetworkOrigin[service][network]
+}
+
+export var routeRequest = (maybeNetwork, maybeRoute, maybeRouteParams, maybeRouteSearch, init) => {
+  var url = new URL(
+    hydrateRoutePathname(maybeRoute, maybeRouteParams),
+    guardOrigin(guardRouteService(guardRoute(maybeRoute)), guardNetwork(maybeNetwork)),
+  )
+
+  url.search = maybeRouteSearch
+
+  return fetch(url, init)
 }
