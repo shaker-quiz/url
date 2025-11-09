@@ -95,10 +95,10 @@ export var ServiceNetworkOrigin = {
 /**
  * @returns {string}
  */
-export var guardOrigin = (maybeService, maybeNetwork) => {
-  var service = guardKey(Service, maybeService)
+export var inferOrigin = (maybeService, maybeNetwork) => {
+  var service = inferKey(Service, maybeService)
 
-  var network = guardKey(Network, maybeNetwork)
+  var network = inferKey(Network, maybeNetwork)
 
   if (!(service in ServiceNetworkOrigin))
     throw TypeError(`Service '${service}' does not exist.`)
@@ -110,11 +110,11 @@ export var guardOrigin = (maybeService, maybeNetwork) => {
 }
 
 export var routeRequest = (maybeNetwork, maybeRoute, maybeRouteParams, maybeRouteSearch, init) => {
-  var route = guardKey(Route, maybeRoute)
+  var route = inferKey(Route, maybeRoute)
 
   var url = new URL(
     hydrateRoutePathname(route, maybeRouteParams),
-    guardOrigin(guardKey(RouteService, route), guardKey(Network, maybeNetwork)),
+    inferOrigin(route, maybeNetwork),
   )
 
   url.search = maybeRouteSearch
