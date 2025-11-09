@@ -1,4 +1,4 @@
-import { guardKey, hydrateRoutePathname, Network, Route, RouteService, Service } from '@shakerquiz/utilities'
+import { hydrateRoutePathname, inferKey, Network, Route, Service } from '@shakerquiz/utilities'
 
 export var ServiceNetworkOrigin = {
   [Service['Roles']]: {
