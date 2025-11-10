@@ -1,4 +1,4 @@
-import { hydrateRoutePathname, inferKey, Network, Route, Service } from '@shakerquiz/utilities'
+import { hydrateRoutePathname, inferKey, Network, Route, RouteService, Service } from '@shakerquiz/utilities'
 
 export var ServiceNetworkOrigin = {
   [Service['Roles']]: {
@@ -95,11 +95,7 @@ export var ServiceNetworkOrigin = {
 /**
  * @returns {string}
  */
-export var inferOrigin = (maybeService, maybeNetwork) => {
-  var service = inferKey(Service, maybeService)
-
-  var network = inferKey(Network, maybeNetwork)
-
+export var inferOrigin = (service, network) => {
   if (!(service in ServiceNetworkOrigin))
     throw TypeError(`Service '${service}' does not exist.`)
 
@@ -112,9 +108,13 @@ export var inferOrigin = (maybeService, maybeNetwork) => {
 export var routeRequest = (maybeNetwork, maybeRoute, maybeRouteParams, maybeRouteSearch, init) => {
   var route = inferKey(Route, maybeRoute)
 
+  var routeService = inferKey(RouteService, maybeRoute)
+
+  var network = inferKey(Network, maybeNetwork)
+
   var url = new URL(
     hydrateRoutePathname(route, maybeRouteParams),
-    inferOrigin(route, maybeNetwork),
+    inferOrigin(routeService, network),
   )
 
   url.search = maybeRouteSearch
