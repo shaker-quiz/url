@@ -92,10 +92,8 @@ export var ServiceNetworkOrigin = {
   },
 }
 
-/**
- * @returns {string}
- */
-export var inferOrigin = (service, network) => {
+/** @returns {string} */
+export const inferOrigin = Object.freeze((service, network) => {
   if (!(service in ServiceNetworkOrigin))
     throw TypeError(`Service '${service}' does not exist.`)
 
@@ -103,9 +101,9 @@ export var inferOrigin = (service, network) => {
     throw TypeError(`Network '${network}' in Service '${service}' does not exist.`)
 
   return ServiceNetworkOrigin[service][network]
-}
+})
 
-export var routeRequest = (maybeNetwork, maybeRoute, maybeRouteParams, maybeRouteSearch, init) => {
+export const routeRequest = Object.freeze((maybeNetwork, maybeRoute, maybeRouteParams, maybeRouteSearch, init) => {
   var route = inferRoute(maybeRoute)
 
   if (route === 'Unknown')
@@ -129,4 +127,4 @@ export var routeRequest = (maybeNetwork, maybeRoute, maybeRouteParams, maybeRout
   url.search = maybeRouteSearch
 
   return fetch(url, init)
-}
+})
