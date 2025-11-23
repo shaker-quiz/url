@@ -23,6 +23,6 @@
     "./vkma": "./source/vkma/index.js"
   },
   "dependencies": {
-    "@shakerquiz/utilities": "0.5.184"
+    "@shakerquiz/utilities": "0.5.188"
   }
 }
