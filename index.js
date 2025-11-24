@@ -1,9 +1,9 @@
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { Service, Services } from '@shakerquiz/utilities'
+import { Network, Service, Services } from '@shakerquiz/utilities'
 
 // ============================================================================
-// Platform enum - defines supported execution platforms
+// Platform enum - extends Runtime concept for build/execution environments
 // ============================================================================
 
 /** @enum {string} */
@@ -16,61 +16,47 @@ const Platform = {
 }
 
 // ============================================================================
-// Network enum - defines network types for env variable naming
-// ============================================================================
-
-/** @enum {string} */
-const Network = {
-  Docker: 'Docker',
-  Public: 'Public',
-}
-
-const Networks = Object.values(Network)
-
-// ============================================================================
-// Consumer to Platform mapping
+// Consumer to Platform mapping using Service enum keys
 // ============================================================================
 
 /** @type {Record<string, string>} */
 const ConsumerPlatform = {
-  checkin: Platform.Deno,
-  cities: Platform.Deno,
-  files: Platform.Node,
-  games: Platform.Deno,
-  hub: Platform.NextJs,
-  integrations: Platform.Node,
-  landing: Platform.NextJs,
-  locations: Platform.Deno,
-  procedures: Platform.Node,
-  registrations: Platform.Deno,
-  roles: Platform.Deno,
-  themes: Platform.Deno,
-  updates: Platform.Node,
-  users: Platform.Deno,
-  venues: Platform.Deno,
-  vkma: Platform.Vite,
+  [Service['Checkin']]: Platform['Deno'],
+  [Service['Cities']]: Platform['Deno'],
+  [Service['Files']]: Platform['Node'],
+  [Service['Games']]: Platform['Deno'],
+  [Service['Hub']]: Platform['NextJs'],
+  [Service['Integrations']]: Platform['Node'],
+  [Service['Landing']]: Platform['NextJs'],
+  [Service['Locations']]: Platform['Deno'],
+  [Service['Procedures']]: Platform['Node'],
+  [Service['Registrations']]: Platform['Deno'],
+  [Service['Roles']]: Platform['Deno'],
+  [Service['Themes']]: Platform['Deno'],
+  [Service['Updates']]: Platform['Node'],
+  [Service['Users']]: Platform['Deno'],
+  [Service['Venues']]: Platform['Deno'],
+  [Service['Vkma']]: Platform['Vite'],
 }
 
-const Consumers = Object.keys(ConsumerPlatform)
+const Networks = Object.values(Network)
 
 // ============================================================================
 // Environment variable access generators per platform
 // ============================================================================
 
 /**
- * Generates env variable name based on service, network and platform
- * @param {string} service - Service name (e.g., 'Users')
- * @param {string} network - Network type (e.g., 'Docker')
- * @param {string} platform - Target platform
- * @returns {string} - Environment variable name
+ * @param {string} service
+ * @param {string} network
+ * @param {string} platform
+ * @returns {string}
  */
 const generateEnvVarName = (service, network, platform) => {
   const baseVar = `${service.toUpperCase()}_${network.toUpperCase()}_ORIGIN`
-
   switch (platform) {
-    case Platform.Vite:
+    case Platform['Vite']:
       return `VITE_${baseVar}`
-    case Platform.NextJs:
+    case Platform['NextJs']:
       return `NEXT_PUBLIC_${baseVar}`
     default:
       return baseVar
@@ -78,20 +64,19 @@ const generateEnvVarName = (service, network, platform) => {
 }
 
 /**
- * Generates env variable access code based on platform
- * @param {string} varName - Environment variable name
- * @param {string} platform - Target platform
- * @returns {string} - Code to access the env variable
+ * @param {string} varName
+ * @param {string} platform
+ * @returns {string}
  */
 const generateEnvAccess = (varName, platform) => {
   switch (platform) {
-    case Platform.Deno:
+    case Platform['Deno']:
       return `Deno.env.get('${varName}')`
-    case Platform.Vite:
+    case Platform['Vite']:
       return `import.meta.env.${varName}`
-    case Platform.Node:
-    case Platform.Bun:
-    case Platform.NextJs:
+    case Platform['Node']:
+    case Platform['Bun']:
+    case Platform['NextJs']:
     default:
       return `process.env.${varName}`
   }
@@ -102,87 +87,47 @@ const generateEnvAccess = (varName, platform) => {
 // ============================================================================
 
 /**
- * Generates ServiceNetworkOrigin object entries
- * @param {string} platform - Target platform
- * @returns {string} - Generated code for ServiceNetworkOrigin object
+ * @param {string} platform
+ * @returns {string}
  */
 const generateServiceNetworkOriginEntries = platform =>
   Services.map(service => {
     const networkEntries = Networks.map(network => {
       const varName = generateEnvVarName(service, network, platform)
       const envAccess = generateEnvAccess(varName, platform)
-      return `    [Network['${network}']]: ${envAccess},`
+      return `[Network['${network}']]: ${envAccess},`
     }).join('\n')
-
-    return `  [Service['${service}']]: {\n${networkEntries}\n  },`
-  }).join('\n\n')
+    return `[Service['${service}']]: {\n${networkEntries}\n},`
+  }).join('\n')
 
 /**
- * Generates the complete index.js file content for a consumer
- * @param {string} platform - Target platform
- * @returns {string} - Complete file content
+ * @param {string} platform
+ * @param {string} staticContent
+ * @returns {string}
  */
-const generateFileContent = platform => `import { hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService, Network, Service } from '@shakerquiz/utilities'
+const generateFileContent = (platform, staticContent) =>
+  `import { hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService, Network, Service } from '@shakerquiz/utilities'
 
 export var ServiceNetworkOrigin = {
 ${generateServiceNetworkOriginEntries(platform)}
 }
 
-/** @returns {string} */
-export const inferOrigin = Object.freeze((service, network) => {
-  if (!(service in ServiceNetworkOrigin))
-    throw TypeError(\`Service '\${service}' does not exist.\`)
-
-  if (!(network in ServiceNetworkOrigin[service]))
-    throw TypeError(\`Network '\${network}' in Service '\${service}' does not exist.\`)
-
-  return ServiceNetworkOrigin[service][network]
-})
-
-export const routeRequest = Object.freeze((maybeNetwork, maybeRoute, maybeRouteParams, maybeRouteSearch, init) => {
-  var route = inferRoute(maybeRoute)
-
-  if (route === 'Unknown')
-    throw TypeError(\`[routeRequest] Could not infer route for value: '\${maybeRoute}'.\`)
-
-  var service = inferRouteService(maybeRoute)
-
-  if (service === 'Unknown')
-    throw TypeError(\`[routeRequest] Could not infer service for value: '\${maybeRoute}'.\`)
-
-  var network = inferNetwork(maybeNetwork)
-
-  if (network === 'Unknown')
-    throw TypeError(\`[routeRequest] Could not infer network for value: '\${maybeRoute}'.\`)
-
-  var url = new URL(
-    hydrateRoutePathname(route, maybeRouteParams),
-    inferOrigin(service, network),
-  )
-
-  url.search = maybeRouteSearch
-
-  return fetch(url, init)
-})
-`
+${staticContent}`
 
 // ============================================================================
-// File writing
+// File operations
 // ============================================================================
 
 /**
- * Writes generated content to source/consumer/index.js
- * @param {string} consumer - Consumer name (directory name)
- * @param {string} content - File content to write
+ * @param {string} consumer
+ * @param {string} content
  */
 const writeConsumerFile = async (consumer, content) => {
-  const dirPath = join('source', consumer)
+  const dirPath = join('source', consumer.toLowerCase())
   const filePath = join(dirPath, 'index.js')
-
   await mkdir(dirPath, { recursive: true })
   await writeFile(filePath, content)
-
-  console.log(`Generated: ${filePath}`)
+  return filePath
 }
 
 // ============================================================================
@@ -190,28 +135,30 @@ const writeConsumerFile = async (consumer, content) => {
 // ============================================================================
 
 const generateAll = async () => {
-  console.log('Starting generation of source/*/index.js files...\n')
+  const staticContent = await readFile(join('template', 'static.js'), 'utf-8')
 
   const results = await Promise.all(
-    Consumers.map(async consumer => {
-      const platform = ConsumerPlatform[consumer]
-      const content = generateFileContent(platform)
-      await writeConsumerFile(consumer, content)
-      return { consumer, platform }
+    Object.entries(ConsumerPlatform).map(async ([consumer, platform]) => {
+      const content = generateFileContent(platform, staticContent)
+      const filePath = await writeConsumerFile(consumer, content)
+      return { Consumer: consumer, Platform: platform, Path: filePath }
     }),
   )
 
-  console.log(`\nGenerated ${results.length} files successfully.`)
-  console.log('\nPlatform distribution:')
+  console.log('\n📦 Generated files:\n')
+  console.table(results)
 
-  const platformCounts = results.reduce((acc, { platform }) => {
-    acc[platform] = (acc[platform] || 0) + 1
+  const platformCounts = results.reduce((acc, { Platform: p }) => {
+    acc[p] = (acc[p] || 0) + 1
     return acc
   }, {})
 
-  Object.entries(platformCounts)
-    .sort(([, a], [, b]) => b - a)
-    .forEach(([platform, count]) => console.log(`  ${platform}: ${count}`))
+  console.log('\n📊 Platform distribution:\n')
+  console.table(
+    Object.entries(platformCounts)
+      .sort(([, a], [, b]) => b - a)
+      .map(([platform, count]) => ({ Platform: platform, Count: count })),
+  )
 }
 
 await generateAll()
