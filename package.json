@@ -5,8 +5,7 @@
   "author": "yurkimus <yurkimus@gmail.com>",
   "license": "ISC",
   "scripts": {
-    "generate": "node ./index.js",
-    "prepublishOnly": "npm run generate"
+    "prepublishOnly": "node ./index.js"
   },
   "exports": {
     "./checkin": "./source/checkin/index.js",
