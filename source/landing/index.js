@@ -1,14 +1,14 @@
 import { hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService, Network, Service } from '@shakerquiz/utilities'
 
 export var ServiceNetworkOrigin = {
-  [Service['Roles']]: {
-    [Network['Docker']]: process.env.NEXT_PUBLIC_ROLES_DOCKER_ORIGIN,
-    [Network['Public']]: process.env.NEXT_PUBLIC_ROLES_PUBLIC_ORIGIN,
-  },
-
   [Service['Users']]: {
     [Network['Docker']]: process.env.NEXT_PUBLIC_USERS_DOCKER_ORIGIN,
     [Network['Public']]: process.env.NEXT_PUBLIC_USERS_PUBLIC_ORIGIN,
+  },
+
+  [Service['Roles']]: {
+    [Network['Docker']]: process.env.NEXT_PUBLIC_ROLES_DOCKER_ORIGIN,
+    [Network['Public']]: process.env.NEXT_PUBLIC_ROLES_PUBLIC_ORIGIN,
   },
 
   [Service['Checkin']]: {
@@ -51,6 +51,11 @@ export var ServiceNetworkOrigin = {
     [Network['Public']]: process.env.NEXT_PUBLIC_FILES_PUBLIC_ORIGIN,
   },
 
+  [Service['Procedures']]: {
+    [Network['Docker']]: process.env.NEXT_PUBLIC_PROCEDURES_DOCKER_ORIGIN,
+    [Network['Public']]: process.env.NEXT_PUBLIC_PROCEDURES_PUBLIC_ORIGIN,
+  },
+
   [Service['Integrations']]: {
     [Network['Docker']]: process.env.NEXT_PUBLIC_INTEGRATIONS_DOCKER_ORIGIN,
     [Network['Public']]: process.env.NEXT_PUBLIC_INTEGRATIONS_PUBLIC_ORIGIN,
@@ -61,14 +66,9 @@ export var ServiceNetworkOrigin = {
     [Network['Public']]: process.env.NEXT_PUBLIC_UPDATES_PUBLIC_ORIGIN,
   },
 
-  [Service['Procedures']]: {
-    [Network['Docker']]: process.env.NEXT_PUBLIC_PROCEDURES_DOCKER_ORIGIN,
-    [Network['Public']]: process.env.NEXT_PUBLIC_PROCEDURES_PUBLIC_ORIGIN,
-  },
-
-  [Service['Minio']]: {
-    [Network['Docker']]: process.env.NEXT_PUBLIC_MINIO_DOCKER_ORIGIN,
-    [Network['Public']]: process.env.NEXT_PUBLIC_MINIO_PUBLIC_ORIGIN,
+  [Service['Hub']]: {
+    [Network['Docker']]: process.env.NEXT_PUBLIC_HUB_DOCKER_ORIGIN,
+    [Network['Public']]: process.env.NEXT_PUBLIC_HUB_PUBLIC_ORIGIN,
   },
 
   [Service['Landing']]: {
@@ -79,11 +79,6 @@ export var ServiceNetworkOrigin = {
   [Service['Vkma']]: {
     [Network['Docker']]: process.env.NEXT_PUBLIC_VKMA_DOCKER_ORIGIN,
     [Network['Public']]: process.env.NEXT_PUBLIC_VKMA_PUBLIC_ORIGIN,
-  },
-
-  [Service['Hub']]: {
-    [Network['Docker']]: process.env.NEXT_PUBLIC_HUB_DOCKER_ORIGIN,
-    [Network['Public']]: process.env.NEXT_PUBLIC_HUB_PUBLIC_ORIGIN,
   },
 
   [Service['Minio']]: {

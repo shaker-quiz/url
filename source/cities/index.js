@@ -1,14 +1,14 @@
 import { hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService, Network, Service } from '@shakerquiz/utilities'
 
 export var ServiceNetworkOrigin = {
-  [Service['Roles']]: {
-    [Network['Docker']]: Deno.env.get('ROLES_DOCKER_ORIGIN'),
-    [Network['Public']]: Deno.env.get('ROLES_PUBLIC_ORIGIN'),
-  },
-
   [Service['Users']]: {
     [Network['Docker']]: Deno.env.get('USERS_DOCKER_ORIGIN'),
     [Network['Public']]: Deno.env.get('USERS_PUBLIC_ORIGIN'),
+  },
+
+  [Service['Roles']]: {
+    [Network['Docker']]: Deno.env.get('ROLES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('ROLES_PUBLIC_ORIGIN'),
   },
 
   [Service['Checkin']]: {
@@ -51,6 +51,11 @@ export var ServiceNetworkOrigin = {
     [Network['Public']]: Deno.env.get('FILES_PUBLIC_ORIGIN'),
   },
 
+  [Service['Procedures']]: {
+    [Network['Docker']]: Deno.env.get('PROCEDURES_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('PROCEDURES_PUBLIC_ORIGIN'),
+  },
+
   [Service['Integrations']]: {
     [Network['Docker']]: Deno.env.get('INTEGRATIONS_DOCKER_ORIGIN'),
     [Network['Public']]: Deno.env.get('INTEGRATIONS_PUBLIC_ORIGIN'),
@@ -61,14 +66,9 @@ export var ServiceNetworkOrigin = {
     [Network['Public']]: Deno.env.get('UPDATES_PUBLIC_ORIGIN'),
   },
 
-  [Service['Procedures']]: {
-    [Network['Docker']]: Deno.env.get('PROCEDURES_DOCKER_ORIGIN'),
-    [Network['Public']]: Deno.env.get('PROCEDURES_PUBLIC_ORIGIN'),
-  },
-
-  [Service['Minio']]: {
-    [Network['Docker']]: Deno.env.get('MINIO_DOCKER_ORIGIN'),
-    [Network['Public']]: Deno.env.get('MINIO_PUBLIC_ORIGIN'),
+  [Service['Hub']]: {
+    [Network['Docker']]: Deno.env.get('HUB_DOCKER_ORIGIN'),
+    [Network['Public']]: Deno.env.get('HUB_PUBLIC_ORIGIN'),
   },
 
   [Service['Landing']]: {
@@ -79,11 +79,6 @@ export var ServiceNetworkOrigin = {
   [Service['Vkma']]: {
     [Network['Docker']]: Deno.env.get('VKMA_DOCKER_ORIGIN'),
     [Network['Public']]: Deno.env.get('VKMA_PUBLIC_ORIGIN'),
-  },
-
-  [Service['Hub']]: {
-    [Network['Docker']]: Deno.env.get('HUB_DOCKER_ORIGIN'),
-    [Network['Public']]: Deno.env.get('HUB_PUBLIC_ORIGIN'),
   },
 
   [Service['Minio']]: {

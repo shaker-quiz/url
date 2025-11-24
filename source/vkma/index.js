@@ -1,14 +1,14 @@
 import { hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService, Network, Service } from '@shakerquiz/utilities'
 
 export var ServiceNetworkOrigin = {
-  [Service['Roles']]: {
-    [Network['Docker']]: import.meta.env.VITE_ROLES_DOCKER_ORIGIN,
-    [Network['Public']]: import.meta.env.VITE_ROLES_PUBLIC_ORIGIN,
-  },
-
   [Service['Users']]: {
     [Network['Docker']]: import.meta.env.VITE_USERS_DOCKER_ORIGIN,
     [Network['Public']]: import.meta.env.VITE_USERS_PUBLIC_ORIGIN,
+  },
+
+  [Service['Roles']]: {
+    [Network['Docker']]: import.meta.env.VITE_ROLES_DOCKER_ORIGIN,
+    [Network['Public']]: import.meta.env.VITE_ROLES_PUBLIC_ORIGIN,
   },
 
   [Service['Checkin']]: {
@@ -51,6 +51,11 @@ export var ServiceNetworkOrigin = {
     [Network['Public']]: import.meta.env.VITE_FILES_PUBLIC_ORIGIN,
   },
 
+  [Service['Procedures']]: {
+    [Network['Docker']]: import.meta.env.VITE_PROCEDURES_DOCKER_ORIGIN,
+    [Network['Public']]: import.meta.env.VITE_PROCEDURES_PUBLIC_ORIGIN,
+  },
+
   [Service['Integrations']]: {
     [Network['Docker']]: import.meta.env.VITE_INTEGRATIONS_DOCKER_ORIGIN,
     [Network['Public']]: import.meta.env.VITE_INTEGRATIONS_PUBLIC_ORIGIN,
@@ -61,14 +66,9 @@ export var ServiceNetworkOrigin = {
     [Network['Public']]: import.meta.env.VITE_UPDATES_PUBLIC_ORIGIN,
   },
 
-  [Service['Procedures']]: {
-    [Network['Docker']]: import.meta.env.VITE_PROCEDURES_DOCKER_ORIGIN,
-    [Network['Public']]: import.meta.env.VITE_PROCEDURES_PUBLIC_ORIGIN,
-  },
-
-  [Service['Minio']]: {
-    [Network['Docker']]: import.meta.env.VITE_MINIO_DOCKER_ORIGIN,
-    [Network['Public']]: import.meta.env.VITE_MINIO_PUBLIC_ORIGIN,
+  [Service['Hub']]: {
+    [Network['Docker']]: import.meta.env.VITE_HUB_DOCKER_ORIGIN,
+    [Network['Public']]: import.meta.env.VITE_HUB_PUBLIC_ORIGIN,
   },
 
   [Service['Landing']]: {
@@ -79,11 +79,6 @@ export var ServiceNetworkOrigin = {
   [Service['Vkma']]: {
     [Network['Docker']]: import.meta.env.VITE_VKMA_DOCKER_ORIGIN,
     [Network['Public']]: import.meta.env.VITE_VKMA_PUBLIC_ORIGIN,
-  },
-
-  [Service['Hub']]: {
-    [Network['Docker']]: import.meta.env.VITE_HUB_DOCKER_ORIGIN,
-    [Network['Public']]: import.meta.env.VITE_HUB_PUBLIC_ORIGIN,
   },
 
   [Service['Minio']]: {
