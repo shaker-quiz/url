@@ -5,11 +5,6 @@ const template = await readFile('template.js', 'utf-8')
 
 const filterKnownRuntimes = ([, runtime]) => runtime in Runtime
 
-const writeServiceModule = ({ service, data, dir = service.toLowerCase() }) =>
-  Promise.resolve()
-    .then(() => mkdir(['source', dir].join('/')))
-    .then(() => writeFile(['source', dir, 'index.js'].join('/'), data))
-
 const getNetworkEntry = ({ runtime, network, identifier }) => {
   switch (runtime) {
     case Runtime['Bun']:
@@ -26,6 +21,11 @@ const getNetworkEntry = ({ runtime, network, identifier }) => {
 const getServiceEntry = ({ service, networks }) => `[Service['${service}']]: {\n${networks}\n},`
 
 const getIdentifier = ({ service, network }) => [service, network, 'origin'].join('_').toUpperCase()
+
+const writeServiceModule = ({ service, data, dir = service.toLowerCase() }) =>
+  Promise.resolve()
+    .then(() => mkdir(['source', dir].join('/')))
+    .then(() => writeFile(['source', dir, 'index.js'].join('/'), data))
 
 await Promise.all(
   Object.entries(ServiceRuntime)
