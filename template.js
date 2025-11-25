@@ -1,3 +1,7 @@
+import { hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService, Network, Service } from '@shakerquiz/utilities'
+
+export var ServiceNetworkOrigin = {}
+
 /** @returns {string} */
 export const inferOrigin = Object.freeze((service, network) => {
   if (!(service in ServiceNetworkOrigin))

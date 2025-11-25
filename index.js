@@ -1,49 +1,35 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { Network, Service, Services } from '@shakerquiz/utilities'
-
-// ============================================================================
-// Platform enum - extends Runtime concept for build/execution environments
-// ============================================================================
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { Network, Runtime, Service, Services } from '@shakerquiz/utilities'
 
 /** @enum {string} */
 const Platform = {
-  Node: 'Node',
-  Deno: 'Deno',
+  ...Runtime,
   Bun: 'Bun',
+  Deno: 'Deno',
   Vite: 'Vite',
   NextJs: 'NextJs',
 }
-
-// ============================================================================
-// Consumer to Platform mapping using Service enum keys
-// ============================================================================
 
 /** @type {Record<string, string>} */
 const ConsumerPlatform = {
   [Service['Checkin']]: Platform['Deno'],
   [Service['Cities']]: Platform['Deno'],
-  [Service['Files']]: Platform['Node'],
+  [Service['Files']]: Platform['Bun'],
   [Service['Games']]: Platform['Deno'],
   [Service['Hub']]: Platform['NextJs'],
-  [Service['Integrations']]: Platform['Node'],
+  [Service['Integrations']]: Platform['Bun'],
   [Service['Landing']]: Platform['NextJs'],
   [Service['Locations']]: Platform['Deno'],
-  [Service['Procedures']]: Platform['Node'],
+  [Service['Procedures']]: Platform['Bun'],
   [Service['Registrations']]: Platform['Deno'],
   [Service['Roles']]: Platform['Deno'],
   [Service['Themes']]: Platform['Deno'],
-  [Service['Updates']]: Platform['Node'],
+  [Service['Updates']]: Platform['Bun'],
   [Service['Users']]: Platform['Deno'],
   [Service['Venues']]: Platform['Deno'],
   [Service['Vkma']]: Platform['Vite'],
 }
-
-const Networks = Object.values(Network)
-
-// ============================================================================
-// Environment variable access generators per platform
-// ============================================================================
 
 /**
  * @param {string} service
@@ -74,7 +60,6 @@ const generateEnvAccess = (varName, platform) => {
       return `Deno.env.get('${varName}')`
     case Platform['Vite']:
       return `import.meta.env.${varName}`
-    case Platform['Node']:
     case Platform['Bun']:
     case Platform['NextJs']:
     default:
@@ -82,17 +67,13 @@ const generateEnvAccess = (varName, platform) => {
   }
 }
 
-// ============================================================================
-// Code generation helpers
-// ============================================================================
-
 /**
  * @param {string} platform
  * @returns {string}
  */
 const generateServiceNetworkOriginEntries = platform =>
   Services.map(service => {
-    const networkEntries = Networks.map(network => {
+    const networkEntries = Object.values(Network).map(network => {
       const varName = generateEnvVarName(service, network, platform)
       const envAccess = generateEnvAccess(varName, platform)
       return `[Network['${network}']]: ${envAccess},`
@@ -102,21 +83,11 @@ const generateServiceNetworkOriginEntries = platform =>
 
 /**
  * @param {string} platform
- * @param {string} staticContent
+ * @param {string} template
  * @returns {string}
  */
-const generateFileContent = (platform, staticContent) =>
-  `import { hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService, Network, Service } from '@shakerquiz/utilities'
-
-export var ServiceNetworkOrigin = {
-${generateServiceNetworkOriginEntries(platform)}
-}
-
-${staticContent}`
-
-// ============================================================================
-// File operations
-// ============================================================================
+const generateFileContent = (platform, template) =>
+  template.replace('export var ServiceNetworkOrigin = {}', `export var ServiceNetworkOrigin = {\n${generateServiceNetworkOriginEntries(platform)}\n}`)
 
 /**
  * @param {string} consumer
@@ -130,16 +101,12 @@ const writeConsumerFile = async (consumer, content) => {
   return filePath
 }
 
-// ============================================================================
-// Main execution
-// ============================================================================
-
 const generateAll = async () => {
-  const staticContent = await readFile(join('template', 'static.js'), 'utf-8')
+  const template = await readFile('template.js', 'utf-8')
 
   const results = await Promise.all(
     Object.entries(ConsumerPlatform).map(async ([consumer, platform]) => {
-      const content = generateFileContent(platform, staticContent)
+      const content = generateFileContent(platform, template)
       const filePath = await writeConsumerFile(consumer, content)
       return { Consumer: consumer, Platform: platform, Path: filePath }
     }),
