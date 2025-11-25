@@ -78,7 +78,7 @@ const generateServiceNetworkOriginEntries = platform =>
       return `[Network['${network}']]: ${envAccess},`
     }).join('\n')
     return `[Service['${service}']]: {\n${networkEntries}\n},`
-  }).join('\n')
+  }).join('\n\n')
 
 /**
  * @param {string} platform
