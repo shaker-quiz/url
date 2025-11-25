@@ -5,10 +5,10 @@ const template = await readFile('template.js', 'utf-8')
 
 const filterKnownRuntimes = ([, runtime]) => runtime in Runtime
 
-const writeServiceModule = ({ service, data }) =>
+const writeServiceModule = ({ service, data, dir = service.toLowerCase() }) =>
   Promise.resolve()
-    .then(() => mkdir(['source', service].join('/')))
-    .then(() => writeFile(['source', service, 'index.js'].join('/'), data))
+    .then(() => mkdir(['source', dir].join('/')))
+    .then(() => writeFile(['source', dir, 'index.js'].join('/'), data))
 
 const getNetworkEntry = ({ runtime, network, identifier }) => {
   switch (runtime) {
