@@ -75,10 +75,10 @@ const generateServiceNetworkOriginEntries = platform =>
     const networkEntries = Object.values(Network).map(network => {
       const varName = generateEnvVarName(service, network, platform)
       const envAccess = generateEnvAccess(varName, platform)
-      return `[Network['${network}']]: ${envAccess},`
+      return `    [Network['${network}']]: ${envAccess},`
     }).join('\n')
-    return `[Service['${service}']]: {\n${networkEntries}\n},`
-  }).join('\n')
+    return `  [Service['${service}']]: {\n${networkEntries}\n  },`
+  }).join('\n\n')
 
 /**
  * @param {string} platform
