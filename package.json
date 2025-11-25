@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@shakerquiz/url",
-  "version": "0.0.19",
+  "version": "0.0.26",
   "author": "yurkimus <yurkimus@gmail.com>",
   "license": "ISC",
   "exports": {
@@ -23,6 +23,6 @@
     "./vkma": "./source/vkma/index.js"
   },
   "dependencies": {
-    "@shakerquiz/utilities": "0.5.180"
+    "@shakerquiz/utilities": "0.5.197"
   }
 }
