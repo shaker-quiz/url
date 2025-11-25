@@ -31,6 +31,6 @@ jobs:
         run: |
           git add .
           git commit -m "chore: regenerate url files"
-      - run: npm version patch
-      - run: npm publish
+      # - run: npm version patch
+      # - run: npm publish
       - run: git push --follow-tags
