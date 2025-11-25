@@ -9,6 +9,9 @@
     "generate": "node ./index.js",
     "prepublishOnly": "npm run generate && npm run format"
   },
+  "files": [
+    "source"
+  ],
   "exports": {
     "./checkin": "./source/checkin/index.js",
     "./cities": "./source/cities/index.js",
