@@ -5,7 +5,7 @@
   "author": "yurkimus <yurkimus@gmail.com>",
   "license": "ISC",
   "scripts": {
-    "format": "npx dprint fmt",
+    "format": "npx -y dprint fmt",
     "generate": "node ./index.js",
     "prepublishOnly": "npm run generate && npm run format"
   },
