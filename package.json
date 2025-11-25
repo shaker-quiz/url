@@ -4,6 +4,11 @@
   "version": "0.0.26",
   "author": "yurkimus <yurkimus@gmail.com>",
   "license": "ISC",
+  "scripts": {
+    "format": "npx dprint fmt",
+    "generate": "node ./index.js",
+    "prepublishOnly": "npm run generate && npm run format"
+  },
   "exports": {
     "./checkin": "./source/checkin/index.js",
     "./cities": "./source/cities/index.js",
