@@ -1,4 +1,4 @@
-import {hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService} from '@shakerquiz/utilities'
+import { hydrateRoutePathname, inferNetwork, inferRoute, inferRouteService, Network, Service } from '@shakerquiz/utilities'
 
 export const ServiceNetworkOrigin = Object.freeze({/* ... */})
 
