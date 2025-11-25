@@ -5,7 +5,7 @@
     "semiColons": "asi",
     "importDeclaration.forceSingleLine": true,
     "arrowFunction.useParentheses": "preferNone",
-    "useBraces": "maintain",
+    "useBraces": "maintain"
   },
   "json": {},
   "markdown": {},
