@@ -8,7 +8,6 @@ const Platform = {
   Bun: 'Bun',
   Deno: 'Deno',
   Vite: 'Vite',
-  NextJs: 'NextJs',
 }
 
 /** @type {Record<string, string>} */
@@ -17,9 +16,9 @@ const ConsumerPlatform = {
   [Service['Cities']]: Platform['Deno'],
   [Service['Files']]: Platform['Bun'],
   [Service['Games']]: Platform['Deno'],
-  [Service['Hub']]: Platform['NextJs'],
+  [Service['Hub']]: Platform['Next'],
   [Service['Integrations']]: Platform['Bun'],
-  [Service['Landing']]: Platform['NextJs'],
+  [Service['Landing']]: Platform['Next'],
   [Service['Locations']]: Platform['Deno'],
   [Service['Procedures']]: Platform['Bun'],
   [Service['Registrations']]: Platform['Deno'],
@@ -42,7 +41,7 @@ const generateEnvVarName = (service, network, platform) => {
   switch (platform) {
     case Platform['Vite']:
       return `VITE_${baseVar}`
-    case Platform['NextJs']:
+    case Platform['Next']:
       return `NEXT_PUBLIC_${baseVar}`
     default:
       return baseVar
@@ -61,7 +60,7 @@ const generateEnvAccess = (varName, platform) => {
     case Platform['Vite']:
       return `import.meta.env.${varName}`
     case Platform['Bun']:
-    case Platform['NextJs']:
+    case Platform['Next']:
     default:
       return `process.env.${varName}`
   }
@@ -87,7 +86,10 @@ const generateServiceNetworkOriginEntries = platform =>
  * @returns {string}
  */
 const generateFileContent = (platform, template) =>
-  template.replace('export var ServiceNetworkOrigin = {}', `export var ServiceNetworkOrigin = {\n${generateServiceNetworkOriginEntries(platform)}\n}`)
+  template.replace(
+    'export var ServiceNetworkOrigin = {}',
+    `export var ServiceNetworkOrigin = {\n${generateServiceNetworkOriginEntries(platform)}\n}`,
+  )
 
 /**
  * @param {string} consumer
