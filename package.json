@@ -6,7 +6,8 @@
   "license": "ISC",
   "scripts": {
     "generate": "node ./index.js",
-    "prepublishOnly": "npm run generate && npx dprint fmt"
+    "format": "npx dprint fmt",
+    "prepublishOnly": "npm run generate && npm run format"
   },
   "exports": {
     "./checkin": "./source/checkin/index.js",

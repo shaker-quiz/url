@@ -26,7 +26,7 @@ jobs:
       - run: git config user.email "github-actions[bot]@users.noreply.github.com"
       - run: npm ci
       - run: npm run generate
-      - run: npx dprint fmt
+      - run: npm run format
       - name: Commit generated files
         run: |
           git add .
