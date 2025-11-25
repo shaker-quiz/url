@@ -2,7 +2,7 @@ name: Publish Package
 
 on:
   pull_request:
-    types: [ closed ]
+    types: [closed]
     branches:
       - main
 
@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: "20"
       - run: npm install -g npm@latest
       - run: git config user.name "github-actions[bot]"
       - run: git config user.email "github-actions[bot]@users.noreply.github.com"
