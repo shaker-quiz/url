@@ -24,7 +24,7 @@ const getIdentifier = ({ service, network }) => [service, network, 'origin'].joi
 
 const writeServiceModule = ({ service, data, dir = service.toLowerCase() }) =>
   Promise.resolve()
-    .then(() => mkdir(['source', dir].join('/')))
+    .then(() => mkdir(['source', dir].join('/'), { recursive: true }))
     .then(() => writeFile(['source', dir, 'index.js'].join('/'), data))
 
 await Promise.all(
