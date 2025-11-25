@@ -35,18 +35,23 @@ await Promise.all(
         service,
         data: template.replace(
           `/* ... */`,
-          Services.map(service =>
-            getServiceEntry({
-              service,
-              networks: Object.values(Network).map(network =>
-                getNetworkEntry({
-                  runtime,
-                  network,
-                  identifier: getIdentifier({ service, network }),
-                })
-              ).join('\n'),
-            })
-          ).join('\n\n'),
+          Services
+            .map(service =>
+              getServiceEntry({
+                service,
+                networks: Object.values(Network)
+                  .map(network =>
+                    getNetworkEntry({
+                      runtime,
+                      network,
+                      identifier: getIdentifier({
+                        service,
+                        network,
+                      }),
+                    })
+                  ).join('\n'),
+              })
+            ).join('\n\n'),
         ),
       })
     ),
