@@ -4,6 +4,10 @@
   "version": "0.0.26",
   "author": "yurkimus <yurkimus@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaker-quiz/url"
+  },
   "scripts": {
     "prepublishOnly": "bun ./scripts/generate-origins.js"
   },
