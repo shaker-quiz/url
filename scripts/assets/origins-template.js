@@ -1,4 +1,4 @@
-import { hydrateRoutePathname, Network, Relation, Route, RouteService } from '@shakerquiz/utilities'
+import { access, hydrateRoutePathname, Network, Route, RouteService } from '@shakerquiz/utilities'
 
 export const ServiceNetworkOrigin = Object.freeze({/* origins */})
 
@@ -11,17 +11,11 @@ export const request = Object.freeze(
    * @param {*} init
    */
   (network, route, params, search, init) => {
-    var r = Relation
-      .of(Route)
-      .require(route)
+    var r = access(Route, route)
 
-    var rs = Relation
-      .of(RouteService)
-      .require(route)
+    var rs = access(RouteService, route)
 
-    var n = Relation
-      .of(Network)
-      .require(network)
+    var n = access(Network, network)
 
     if (!Object.hasOwn(ServiceNetworkOrigin, rs))
       throw TypeError(`Service '${rs}' does not exist.`)
