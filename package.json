@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@shakerquiz/url",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "author": "yurkimus <yurkimus@gmail.com>",
   "license": "ISC",
   "repository": {
@@ -27,6 +27,7 @@
     "./updates": "./source/updates/index.js",
     "./users": "./source/users/index.js",
     "./venues": "./source/venues/index.js",
+    "./telegram": "./source/telegram/index.js"
     "./vkma": "./source/vkma/index.js"
   },
   "dependencies": {
