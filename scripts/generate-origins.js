@@ -3,7 +3,7 @@ import template from './assets/origins-template.js' with { type: 'text' }
 
 let Service = service => `${service}: Object.freeze({/* networks */})`
 
-let ServiceNetwork = (runtime, service) => network => {
+let ServiceNetwork = (runtime, service, network) => {
   let identifier = [service, network, 'origin']
     .join('_')
     .toUpperCase()
@@ -30,7 +30,7 @@ Object
       `source/${service.toLowerCase()}/index.js`,
       template.replace(
         '/* origins */',
-        Services.map(service => Service(service).replace('/* networks */', Networks.map(ServiceNetwork(runtime, service)))),
+        Services.map(service => '\n' + Service(service).replace('/* networks */', Networks.map(network => '\n' + ServiceNetwork(runtime, service, network)))),
       ),
     )
   )
