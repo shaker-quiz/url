@@ -27,9 +27,10 @@
     "./updates": "./source/updates/index.js",
     "./users": "./source/users/index.js",
     "./venues": "./source/venues/index.js",
+    "./telegram": "./source/telegram/index.js"
     "./vkma": "./source/vkma/index.js"
   },
   "dependencies": {
-    "@shakerquiz/utilities": "0.6.3"
+    "@shakerquiz/utilities": "0.6.5"
   }
 }
