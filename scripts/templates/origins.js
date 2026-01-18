@@ -21,7 +21,10 @@ export const request = Object.freeze(
       throw TypeError(`Service '${rs}' does not exist.`)
 
     if (!Object.hasOwn(ServiceNetworkOrigin[rs], n))
-      throw TypeError(`Network '${n}' in Service '${rs}' does not exist.`)
+      throw TypeError(`Service '${rs}' Network '${n}' does not exist.`)
+
+    if (!URL.canParse(ServiceNetworkOrigin[rs][n]))
+      throw TypeError(`Origin '${ServiceNetworkOrigin[rs][n]}' cannot be parsed as URL.`)
 
     var url = new URL(hydrateRoutePathname(r, params), ServiceNetworkOrigin[rs][n])
 
