@@ -1,0 +1,54 @@
+name: Bump @shakerquiz/* packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      utilities:
+        type: boolean
+        description: "@shakerquiz/utilities"
+        required: false
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Create branch
+        run: |
+          BRANCH="chore/bump-shakerquiz-$(date +%Y%m%d-%H%M%S)"
+          echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
+          git checkout -b "$BRANCH"
+
+      - name: "@shakerquiz/utilities"
+        if: ${{ inputs.utilities }}
+        run: npm i @shakerquiz/utilities@aquamarine --save-exact --prefer-online
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "chore: bump @shakerquiz packages" || true
+
+      - name: Push branch
+        run: |
+          git push -u origin "$BRANCH"
+
+      - name: Open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "chore: bump @shakerquiz packages" \
+            --body "Automated dependency bump via workflow_dispatch." \
+            --head "$BRANCH" || true
