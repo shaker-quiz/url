@@ -17,6 +17,9 @@ let ServiceNetwork = (runtime, service, network) => {
       return `${network}: Deno.env.get('${identifier}')`
 
     case 'Node':
+      return `${network}: process.env.${identifier}`
+
+    case 'Next':
       return `${network}: process.env.NEXT_PUBLIC_${identifier}`
 
     case 'Vite':
