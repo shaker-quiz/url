@@ -11,7 +11,7 @@ let ServiceNetwork = (runtime, service, network) => {
 
   switch (runtime) {
     case 'Bun':
-      return `${network}: process.env.${identifier}`
+      return `${network}: Bun.env.${identifier}`
 
     case 'Deno':
       return `${network}: Deno.env.get('${identifier}')`
