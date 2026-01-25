@@ -20,7 +20,7 @@ let ServiceNetwork = (runtime, service, network) => {
       return `${network}: process.env.NEXT_PUBLIC_${identifier}`
 
     case 'Vite':
-      return `${network}: process.env.NEXT_PUBLIC_${identifier}`
+      return `${network}: import.meta.env.VITE_${identifier}`
   }
 }
 
