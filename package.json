@@ -9,7 +9,7 @@
     "url": "https://github.com/shaker-quiz/url"
   },
   "scripts": {
-    "prepublishOnly": "bun ./scripts/origins.js"
+    "prepublishOnly": "bun ./scripts/codegen.js && dprint fmt"
   },
   "exports": {
     "./checkin": "./source/checkin/index.js",
@@ -31,6 +31,9 @@
     "./vkma": "./source/vkma/index.js"
   },
   "dependencies": {
-    "@shakerquiz/utilities": "0.6.18"
+    "@shakerquiz/utilities": "4.0.2"
+  },
+  "devDependencies": {
+    "dprint": "0.51.1"
   }
 }
