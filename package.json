@@ -12,7 +12,7 @@
     "prepublishOnly": "bun ./scripts/codegen.js && dprint fmt"
   },
   "exports": {
-    "./*.js": "./source/*.js"
+    "./*": "./source/*/index.js"
   },
   "dependencies": {
     "@shakerquiz/utilities": "4.0.9"
