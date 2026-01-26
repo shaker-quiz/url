@@ -1,4 +1,4 @@
-import { access, hydrateRoutePathname, Network, Route, RouteService } from '@shakerquiz/utilities'
+import { access, hydrateRoutePathname, Network, Route, RouteService, Service } from '@shakerquiz/utilities'
 
 export const ServiceNetworkOrigin = Object.freeze({
   Users: Object.freeze({
@@ -37,17 +37,9 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: process.env.NEXT_PUBLIC_REGISTRATIONS_DOCKER_ORIGIN,
     Public: process.env.NEXT_PUBLIC_REGISTRATIONS_PUBLIC_ORIGIN,
   }),
-  Files: Object.freeze({
-    Docker: process.env.NEXT_PUBLIC_FILES_DOCKER_ORIGIN,
-    Public: process.env.NEXT_PUBLIC_FILES_PUBLIC_ORIGIN,
-  }),
   Procedures: Object.freeze({
     Docker: process.env.NEXT_PUBLIC_PROCEDURES_DOCKER_ORIGIN,
     Public: process.env.NEXT_PUBLIC_PROCEDURES_PUBLIC_ORIGIN,
-  }),
-  Integrations: Object.freeze({
-    Docker: process.env.NEXT_PUBLIC_INTEGRATIONS_DOCKER_ORIGIN,
-    Public: process.env.NEXT_PUBLIC_INTEGRATIONS_PUBLIC_ORIGIN,
   }),
   Updates: Object.freeze({
     Docker: process.env.NEXT_PUBLIC_UPDATES_DOCKER_ORIGIN,
@@ -69,6 +61,18 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: process.env.NEXT_PUBLIC_VKMA_DOCKER_ORIGIN,
     Public: process.env.NEXT_PUBLIC_VKMA_PUBLIC_ORIGIN,
   }),
+  Telegram: Object.freeze({
+    Docker: process.env.NEXT_PUBLIC_TELEGRAM_DOCKER_ORIGIN,
+    Public: process.env.NEXT_PUBLIC_TELEGRAM_PUBLIC_ORIGIN,
+  }),
+  Chatapp: Object.freeze({
+    Docker: process.env.NEXT_PUBLIC_CHATAPP_DOCKER_ORIGIN,
+    Public: process.env.NEXT_PUBLIC_CHATAPP_PUBLIC_ORIGIN,
+  }),
+  Bitrix: Object.freeze({
+    Docker: process.env.NEXT_PUBLIC_BITRIX_DOCKER_ORIGIN,
+    Public: process.env.NEXT_PUBLIC_BITRIX_PUBLIC_ORIGIN,
+  }),
   Minio: Object.freeze({
     Docker: process.env.NEXT_PUBLIC_MINIO_DOCKER_ORIGIN,
     Public: process.env.NEXT_PUBLIC_MINIO_PUBLIC_ORIGIN,
@@ -85,7 +89,9 @@ export const ServiceNetworkOrigin = Object.freeze({
 export const request = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeInit) => {
   var route = access(Route, maybeRoute)
 
-  var routeService = access(RouteService, maybeRoute)
+  var routeService = Object.hasOwn(maybeInit, 'service')
+    ? access(Service, maybeInit.service)
+    : access(RouteService, maybeRoute)
 
   var network = access(Network, maybeNetwork)
 

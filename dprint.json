@@ -9,7 +9,7 @@
   },
   "json": {},
   "includes": [
-    "./source/**/*.js"
+    "**/*.js"
   ],
   "excludes": [
     "**/node_modules",
