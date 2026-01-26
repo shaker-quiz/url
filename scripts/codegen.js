@@ -28,14 +28,26 @@ let ServiceNetwork = (runtime, service, network) => {
   }
 }
 
-Services
-  .map(service => [service, access(ServiceRuntime, service)])
-  .map(([service, runtime]) =>
-    Bun.write(
-      `source/${service.toLowerCase()}/index.js`,
-      template.replace(
-        '/* origins */',
-        Services.map(service => '\n' + Service(service).replace('/* networks */', Networks.map(network => '\n' + ServiceNetwork(runtime, service, network)))),
-      ),
-    )
+await Promise.all(
+  Services
+    .map(service => [service, access(ServiceRuntime, service)])
+    .map(([service, runtime]) =>
+      Bun.write(
+        `source/${service.toLowerCase()}/index.js`,
+        template.replace(
+          '/* origins */',
+          Services.map(service => '\n' + Service(service).replace('/* networks */', Networks.map(network => '\n' + ServiceNetwork(runtime, service, network)))),
+        ),
+      )
+    ),
+)
+
+let packageJson = await Bun.file('package.json').json()
+
+packageJson.exports = [...new Set(Services)]
+  .reduce(
+    (o, service) => (o[`./${service.toLowerCase()}`] = `./source/${service.toLowerCase()}/index.js`, o),
+    {},
   )
+
+await Bun.write('package.json', JSON.stringify(packageJson, null, 2) + '\n')
