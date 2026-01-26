@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@shakerquiz/url",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "author": "yurkimus <yurkimus@gmail.com>",
   "license": "ISC",
   "repository": {
