@@ -1,6 +1,6 @@
 import template from './template.js' with { type: 'text' }
 
-import { Networks, ServiceRuntime, Services } from '@shakerquiz/utilities'
+import { access, Networks, ServiceRuntime, Services } from '@shakerquiz/utilities'
 
 let Service = service => `${service}: Object.freeze({/* networks */})`
 
@@ -16,19 +16,20 @@ let ServiceNetwork = (runtime, service, network) => {
     case 'Deno':
       return `${network}: Deno.env.get('${identifier}')`
 
-    case 'Node':
-      return `${network}: process.env.${identifier}`
-
     case 'Next':
       return `${network}: process.env.NEXT_PUBLIC_${identifier}`
 
     case 'Vite':
       return `${network}: import.meta.env.VITE_${identifier}`
+
+    case 'Node':
+    case 'Unknown':
+      return `${network}: process.env.${identifier}`
   }
 }
 
-Object
-  .entries(ServiceRuntime)
+Services
+  .map(service => [service, access(ServiceRuntime, service)])
   .map(([service, runtime]) =>
     Bun.write(
       `source/${service.toLowerCase()}/index.js`,

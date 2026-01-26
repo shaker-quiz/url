@@ -1,4 +1,4 @@
-import { access, hydrateRoutePathname, Network, Route, RouteService } from '@shakerquiz/utilities'
+import { access, hydrateRoutePathname, Network, Route, RouteService, Service } from '@shakerquiz/utilities'
 
 export const ServiceNetworkOrigin = Object.freeze({
   Users: Object.freeze({
@@ -37,17 +37,9 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: process.env.REGISTRATIONS_DOCKER_ORIGIN,
     Public: process.env.REGISTRATIONS_PUBLIC_ORIGIN,
   }),
-  Files: Object.freeze({
-    Docker: process.env.FILES_DOCKER_ORIGIN,
-    Public: process.env.FILES_PUBLIC_ORIGIN,
-  }),
   Procedures: Object.freeze({
     Docker: process.env.PROCEDURES_DOCKER_ORIGIN,
     Public: process.env.PROCEDURES_PUBLIC_ORIGIN,
-  }),
-  Integrations: Object.freeze({
-    Docker: process.env.INTEGRATIONS_DOCKER_ORIGIN,
-    Public: process.env.INTEGRATIONS_PUBLIC_ORIGIN,
   }),
   Updates: Object.freeze({
     Docker: process.env.UPDATES_DOCKER_ORIGIN,
@@ -69,6 +61,18 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: process.env.VKMA_DOCKER_ORIGIN,
     Public: process.env.VKMA_PUBLIC_ORIGIN,
   }),
+  Telegram: Object.freeze({
+    Docker: process.env.TELEGRAM_DOCKER_ORIGIN,
+    Public: process.env.TELEGRAM_PUBLIC_ORIGIN,
+  }),
+  Chatapp: Object.freeze({
+    Docker: process.env.CHATAPP_DOCKER_ORIGIN,
+    Public: process.env.CHATAPP_PUBLIC_ORIGIN,
+  }),
+  Bitrix: Object.freeze({
+    Docker: process.env.BITRIX_DOCKER_ORIGIN,
+    Public: process.env.BITRIX_PUBLIC_ORIGIN,
+  }),
   Minio: Object.freeze({
     Docker: process.env.MINIO_DOCKER_ORIGIN,
     Public: process.env.MINIO_PUBLIC_ORIGIN,
@@ -85,7 +89,9 @@ export const ServiceNetworkOrigin = Object.freeze({
 export const request = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeInit) => {
   var route = access(Route, maybeRoute)
 
-  var routeService = access(RouteService, maybeRoute)
+  var routeService = Object.hasOwn(maybeInit, 'service')
+    ? access(Service, maybeInit.service)
+    : access(RouteService, maybeRoute)
 
   var network = access(Network, maybeNetwork)
 
