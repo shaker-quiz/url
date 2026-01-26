@@ -1,4 +1,4 @@
-import { access, hydrateRoutePathname, Network, Route, RouteService } from '@shakerquiz/utilities'
+import { access, hydrateRoutePathname, Network, Route, RouteService, Service } from '@shakerquiz/utilities'
 
 export const ServiceNetworkOrigin = Object.freeze({/* origins */})
 
@@ -12,7 +12,9 @@ export const ServiceNetworkOrigin = Object.freeze({/* origins */})
 export const request = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeInit) => {
   var route = access(Route, maybeRoute)
 
-  var routeService = access(RouteService, maybeRoute)
+  var routeService = Object.hasOwn(maybeInit, 'service')
+    ? access(Service, maybeInit.service)
+    : access(RouteService, maybeRoute)
 
   var network = access(Network, maybeNetwork)
 
