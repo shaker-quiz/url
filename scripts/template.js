@@ -7,13 +7,13 @@ export const ServiceNetworkOrigin = Object.freeze({/* origins */})
  * @param {keyof typeof import('@shakerquiz/utilities').Route} maybeRoute
  * @param {any[]} maybeParams
  * @param {ConstructorParameters<typeof URLSearchParams>[0]} maybeSearch
- * @param {Parameters<typeof fetch>[1]} [maybeInit]
+ * @param {keyof typeof import('@shakerquiz/utilities').Service} [maybeService]
  */
-export const request = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeInit) => {
+export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeService) => {
   var route = access(Route, maybeRoute)
 
-  var routeService = Object.hasOwn(maybeInit, 'service')
-    ? access(Service, maybeInit.service)
+  var routeService = maybeService
+    ? access(Service, maybeService)
     : access(RouteService, maybeRoute)
 
   var network = access(Network, maybeNetwork)
@@ -31,5 +31,15 @@ export const request = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, mayb
 
   url.search = new URLSearchParams(maybeSearch)
 
-  return fetch(url, maybeInit)
+  return url
 }
+
+/**
+ * @param {keyof typeof import('@shakerquiz/utilities').Network} maybeNetwork
+ * @param {keyof typeof import('@shakerquiz/utilities').Route} maybeRoute
+ * @param {any[]} maybeParams
+ * @param {ConstructorParameters<typeof URLSearchParams>[0]} maybeSearch
+ * @param {Parameters<typeof fetch>[1]} [maybeInit]
+ */
+export const request = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeInit) =>
+  fetch(url(maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeInit?.service), maybeInit)
