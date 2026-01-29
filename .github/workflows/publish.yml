@@ -1,7 +1,6 @@
-name: Publish
+name: Publish Package
 
 on:
-  workflow_dispatch:
   pull_request:
     types: [ closed ]
     branches:
@@ -14,9 +13,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v5
         with:
