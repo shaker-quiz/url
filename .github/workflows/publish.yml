@@ -10,12 +10,12 @@ on:
       utilities:
         description: "Bump @shakerquiz/utilities@aquamarine ?"
         required: false
-        default: true
+        default: false
         type: boolean
       pr:
         description: "Open PR ?"
         required: false
-        default: true
+        default: false
         type: boolean
 
 permissions:
