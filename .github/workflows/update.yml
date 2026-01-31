@@ -59,3 +59,12 @@ jobs:
             --title "chore: bump @shakerquiz packages" \
             --body "Automated dependency bump via workflow_dispatch." \
             --head "$BRANCH" || true
+
+  publish:
+    needs: bump
+    if: ${{ inputs.pr == false }}
+    uses: ./.github/workflows/publish.yml
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: write
