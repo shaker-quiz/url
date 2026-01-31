@@ -43,7 +43,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add package.json package-lock.json
-          git commit -m "bump @shakerquiz/* packages"
+          git commit -m "bump @shakerquiz/* packages" || true
       - run: git checkout -b "chore/bump-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
         if: github.event_name == 'workflow_dispatch' && inputs.pr
       - run: git push origin HEAD
