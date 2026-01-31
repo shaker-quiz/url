@@ -53,10 +53,6 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: process.env.NEXT_PUBLIC_LANDING_DOCKER_ORIGIN,
     Public: process.env.NEXT_PUBLIC_LANDING_PUBLIC_ORIGIN,
   }),
-  Telegram: Object.freeze({
-    Docker: process.env.NEXT_PUBLIC_TELEGRAM_DOCKER_ORIGIN,
-    Public: process.env.NEXT_PUBLIC_TELEGRAM_PUBLIC_ORIGIN,
-  }),
   Vkma: Object.freeze({
     Docker: process.env.NEXT_PUBLIC_VKMA_DOCKER_ORIGIN,
     Public: process.env.NEXT_PUBLIC_VKMA_PUBLIC_ORIGIN,
@@ -72,6 +68,10 @@ export const ServiceNetworkOrigin = Object.freeze({
   Bitrix: Object.freeze({
     Docker: process.env.NEXT_PUBLIC_BITRIX_DOCKER_ORIGIN,
     Public: process.env.NEXT_PUBLIC_BITRIX_PUBLIC_ORIGIN,
+  }),
+  Reposter: Object.freeze({
+    Docker: process.env.NEXT_PUBLIC_REPOSTER_DOCKER_ORIGIN,
+    Public: process.env.NEXT_PUBLIC_REPOSTER_PUBLIC_ORIGIN,
   }),
   Minio: Object.freeze({
     Docker: process.env.NEXT_PUBLIC_MINIO_DOCKER_ORIGIN,

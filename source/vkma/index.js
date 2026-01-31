@@ -53,10 +53,6 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: import.meta.env.VITE_LANDING_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_LANDING_PUBLIC_ORIGIN,
   }),
-  Telegram: Object.freeze({
-    Docker: import.meta.env.VITE_TELEGRAM_DOCKER_ORIGIN,
-    Public: import.meta.env.VITE_TELEGRAM_PUBLIC_ORIGIN,
-  }),
   Vkma: Object.freeze({
     Docker: import.meta.env.VITE_VKMA_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_VKMA_PUBLIC_ORIGIN,
@@ -72,6 +68,10 @@ export const ServiceNetworkOrigin = Object.freeze({
   Bitrix: Object.freeze({
     Docker: import.meta.env.VITE_BITRIX_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_BITRIX_PUBLIC_ORIGIN,
+  }),
+  Reposter: Object.freeze({
+    Docker: import.meta.env.VITE_REPOSTER_DOCKER_ORIGIN,
+    Public: import.meta.env.VITE_REPOSTER_PUBLIC_ORIGIN,
   }),
   Minio: Object.freeze({
     Docker: import.meta.env.VITE_MINIO_DOCKER_ORIGIN,

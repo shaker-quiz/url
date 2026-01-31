@@ -53,10 +53,6 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: Bun.env.LANDING_DOCKER_ORIGIN,
     Public: Bun.env.LANDING_PUBLIC_ORIGIN,
   }),
-  Telegram: Object.freeze({
-    Docker: Bun.env.TELEGRAM_DOCKER_ORIGIN,
-    Public: Bun.env.TELEGRAM_PUBLIC_ORIGIN,
-  }),
   Vkma: Object.freeze({
     Docker: Bun.env.VKMA_DOCKER_ORIGIN,
     Public: Bun.env.VKMA_PUBLIC_ORIGIN,
@@ -72,6 +68,10 @@ export const ServiceNetworkOrigin = Object.freeze({
   Bitrix: Object.freeze({
     Docker: Bun.env.BITRIX_DOCKER_ORIGIN,
     Public: Bun.env.BITRIX_PUBLIC_ORIGIN,
+  }),
+  Reposter: Object.freeze({
+    Docker: Bun.env.REPOSTER_DOCKER_ORIGIN,
+    Public: Bun.env.REPOSTER_PUBLIC_ORIGIN,
   }),
   Minio: Object.freeze({
     Docker: Bun.env.MINIO_DOCKER_ORIGIN,
