@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-node@v6
         if: github.event_name == 'workflow_dispatch'
         with:
-          node-version: 24
+          node-version: latest
       - run: npm i @shakerquiz/utilities@aquamarine --save-exact --prefer-online
         if: github.event_name == 'workflow_dispatch' && inputs.utilities
       - name: Commit changes
@@ -69,9 +69,8 @@ jobs:
           ref: main
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: latest
       - uses: oven-sh/setup-bun@v2
-      - run: npm install -g npm@latest
       - run: git config user.name "github-actions[bot]"
       - run: git config user.email "github-actions[bot]@users.noreply.github.com"
       - run: npm version patch
