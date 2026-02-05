@@ -73,6 +73,10 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: process.env.REPOSTER_DOCKER_ORIGIN,
     Public: process.env.REPOSTER_PUBLIC_ORIGIN,
   }),
+  Raffle: Object.freeze({
+    Docker: process.env.RAFFLE_DOCKER_ORIGIN,
+    Public: process.env.RAFFLE_PUBLIC_ORIGIN,
+  }),
   Minio: Object.freeze({
     Docker: process.env.MINIO_DOCKER_ORIGIN,
     Public: process.env.MINIO_PUBLIC_ORIGIN,

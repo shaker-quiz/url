@@ -73,6 +73,10 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: import.meta.env.VITE_REPOSTER_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_REPOSTER_PUBLIC_ORIGIN,
   }),
+  Raffle: Object.freeze({
+    Docker: import.meta.env.VITE_RAFFLE_DOCKER_ORIGIN,
+    Public: import.meta.env.VITE_RAFFLE_PUBLIC_ORIGIN,
+  }),
   Minio: Object.freeze({
     Docker: import.meta.env.VITE_MINIO_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_MINIO_PUBLIC_ORIGIN,
