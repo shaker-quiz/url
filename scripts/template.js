@@ -1,4 +1,4 @@
-import { access, hydrateRoutePathname, Network, RouteService, Service } from '@shakerquiz/utilities'
+import { hydrateRoutePathname, Network, routeService, Service } from '@shakerquiz/utilities'
 
 export const ServiceNetworkOrigin = Object.freeze({/* origins */})
 
@@ -15,25 +15,25 @@ export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeSer
       throw TypeError(`Could not access Service['${maybeService}'].`)
   }
 
-  const routeService = maybeService
-    ? Service[maybeService]
-    : access(RouteService, maybeRoute)
+  const service = maybeService
+    ? maybeService
+    : routeService(maybeRoute)
 
   if (!Object.hasOwn(Network, maybeNetwork))
     throw TypeError(`Could not access Network['${maybeNetwork}'].`)
 
   const network = Network[maybeNetwork]
 
-  if (!Object.hasOwn(ServiceNetworkOrigin, routeService))
-    throw TypeError(`Service '${routeService}' does not exist.`)
+  if (!Object.hasOwn(ServiceNetworkOrigin, service))
+    throw TypeError(`Could not access ServiceNetworkOrigin['${service}'].`)
 
-  if (!Object.hasOwn(ServiceNetworkOrigin[routeService], network))
-    throw TypeError(`Service '${routeService}' Network '${network}' does not exist.`)
+  if (!Object.hasOwn(ServiceNetworkOrigin[service], network))
+    throw TypeError(`Could not access ServiceNetworkOrigin['${service}']['${network}'].`)
 
-  if (!URL.canParse(ServiceNetworkOrigin[routeService][network]))
-    throw TypeError(`Origin '${ServiceNetworkOrigin[routeService][network]}' cannot be parsed as URL.`)
+  if (!URL.canParse(ServiceNetworkOrigin[service][network]))
+    throw TypeError(`Origin '${ServiceNetworkOrigin[service][network]}' cannot be parsed as URL.`)
 
-  const url = new URL(hydrateRoutePathname(maybeRoute, maybeParams), ServiceNetworkOrigin[routeService][network])
+  const url = new URL(hydrateRoutePathname(maybeRoute, maybeParams), ServiceNetworkOrigin[service][network])
 
   url.search = new URLSearchParams(maybeSearch)
 
