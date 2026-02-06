@@ -10,13 +10,13 @@ export const ServiceNetworkOrigin = Object.freeze({/* origins */})
  * @param {keyof typeof import('@shakerquiz/utilities').Service} [maybeService]
  */
 export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeService) => {
-  var route = access(Route, maybeRoute)
+  const route = access(Route, maybeRoute)
 
-  var routeService = maybeService
+  const routeService = maybeService
     ? access(Service, maybeService)
     : access(RouteService, maybeRoute)
 
-  var network = access(Network, maybeNetwork)
+  const network = access(Network, maybeNetwork)
 
   if (!Object.hasOwn(ServiceNetworkOrigin, routeService))
     throw TypeError(`Service '${routeService}' does not exist.`)
@@ -27,7 +27,7 @@ export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeSer
   if (!URL.canParse(ServiceNetworkOrigin[routeService][network]))
     throw TypeError(`Origin '${ServiceNetworkOrigin[routeService][network]}' cannot be parsed as URL.`)
 
-  var url = new URL(hydrateRoutePathname(route, maybeParams), ServiceNetworkOrigin[routeService][network])
+  const url = new URL(hydrateRoutePathname(route, maybeParams), ServiceNetworkOrigin[routeService][network])
 
   url.search = new URLSearchParams(maybeSearch)
 
