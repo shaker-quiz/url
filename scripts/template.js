@@ -1,4 +1,4 @@
-import { access, hydrateRoutePathname, Network, Route, RouteService, Service } from '@shakerquiz/utilities'
+import { access, hydrateRoutePathname, Network, RouteService, Service } from '@shakerquiz/utilities'
 
 export const ServiceNetworkOrigin = Object.freeze({/* origins */})
 
@@ -10,11 +10,19 @@ export const ServiceNetworkOrigin = Object.freeze({/* origins */})
  * @param {keyof typeof import('@shakerquiz/utilities').Service} [maybeService]
  */
 export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeService) => {
+  if (maybeService) {
+    if (!Object.hasOwn(Service, maybeService))
+      throw TypeError(`Could not access Service['${maybeService}'].`)
+  }
+
   const routeService = maybeService
-    ? access(Service, maybeService)
+    ? Service[maybeService]
     : access(RouteService, maybeRoute)
 
-  const network = access(Network, maybeNetwork)
+  if (!Object.hasOwn(Network, maybeNetwork))
+    throw TypeError(`Could not access Network['${maybeNetwork}'].`)
+
+  const network = Network[maybeNetwork]
 
   if (!Object.hasOwn(ServiceNetworkOrigin, routeService))
     throw TypeError(`Service '${routeService}' does not exist.`)
