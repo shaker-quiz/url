@@ -1,6 +1,6 @@
 import template from './template.js' with { type: 'text' }
 
-import { access, Networks, ServiceRuntime, Services } from '@shakerquiz/utilities'
+import { getOwn, Networks, ServiceRuntime, Services } from '@shakerquiz/utilities'
 
 let Service = service => `${service}: Object.freeze({/* networks */})`
 
@@ -29,7 +29,7 @@ let ServiceNetwork = (runtime, service, network) => {
 }
 
 Services
-  .map(service => [service, access(ServiceRuntime, service)])
+  .map(service => [service, getOwn(ServiceRuntime, service)])
   .map(([service, runtime]) =>
     Bun.write(
       `source/${service.toLowerCase()}/index.js`,

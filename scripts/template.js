@@ -1,39 +1,29 @@
-import { hydrateRoutePathname, Network, routeService, Service } from '@shakerquiz/utilities'
+import { getOwn, hydrateRoutePathname, Network, routeService, Service } from '@shakerquiz/utilities'
 
 export const ServiceNetworkOrigin = Object.freeze({/* origins */})
 
 /**
  * @param {keyof typeof import('@shakerquiz/utilities').Network} maybeNetwork
- * @param {keyof typeof import('@shakerquiz/utilities').Route} maybeRoute
+ * @param {string} maybeRoute
  * @param {any[]} maybeParams
  * @param {ConstructorParameters<typeof URLSearchParams>[0]} maybeSearch
  * @param {keyof typeof import('@shakerquiz/utilities').Service} [maybeService]
  */
 export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeService) => {
-  if (maybeService) {
-    if (!Object.hasOwn(Service, maybeService))
-      throw TypeError(`Could not access Service['${maybeService}'].`)
-  }
-
-  const service = maybeService
-    ? maybeService
+  var service = maybeService
+    ? getOwn(Service, maybeService)
     : routeService(maybeRoute)
 
-  if (!Object.hasOwn(Network, maybeNetwork))
-    throw TypeError(`Could not access Network['${maybeNetwork}'].`)
+  var network = getOwn(Network, maybeNetwork)
 
-  const network = Network[maybeNetwork]
+  var networkOrigin = getOwn(ServiceNetworkOrigin, service)
 
-  if (!Object.hasOwn(ServiceNetworkOrigin, service))
-    throw TypeError(`Could not access ServiceNetworkOrigin['${service}'].`)
+  var origin = getOwn(networkOrigin, network)
 
-  if (!Object.hasOwn(ServiceNetworkOrigin[service], network))
-    throw TypeError(`Could not access ServiceNetworkOrigin['${service}']['${network}'].`)
+  if (!URL.canParse(origin))
+    throw TypeError(`Origin '${origin}' is not an URL.`)
 
-  if (!URL.canParse(ServiceNetworkOrigin[service][network]))
-    throw TypeError(`Origin '${ServiceNetworkOrigin[service][network]}' cannot be parsed as URL.`)
-
-  const url = new URL(hydrateRoutePathname(maybeRoute, maybeParams), ServiceNetworkOrigin[service][network])
+  var url = new URL(hydrateRoutePathname(maybeRoute, maybeParams), origin)
 
   url.search = new URLSearchParams(maybeSearch)
 
@@ -42,7 +32,7 @@ export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeSer
 
 /**
  * @param {keyof typeof import('@shakerquiz/utilities').Network} maybeNetwork
- * @param {keyof typeof import('@shakerquiz/utilities').Route} maybeRoute
+ * @param {string} maybeRoute
  * @param {any[]} maybeParams
  * @param {ConstructorParameters<typeof URLSearchParams>[0]} maybeSearch
  * @param {Parameters<typeof fetch>[1]} [maybeInit]
