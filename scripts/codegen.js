@@ -1,6 +1,7 @@
 import template from './template.js' with { type: 'text' }
 
-import { getOwn, Networks, ServiceRuntime, Services } from '@shakerquiz/utilities'
+import { Networks, ServiceRuntime, Services } from '@shakerquiz/utilities'
+import { getOwn } from '@shakerquiz/utilities/helpers/object'
 
 let Service = service => `${service}: Object.freeze({/* networks */})`
 
