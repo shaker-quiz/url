@@ -1,4 +1,5 @@
-import { getOwn, hydrateRoutePathname, Network, routeService, Service } from '@shakerquiz/utilities'
+import { hydrateRoutePathname, Network, routeService, Service } from '@shakerquiz/utilities'
+import { getOwn } from '@shakerquiz/utilities/helpers/object'
 
 export const ServiceNetworkOrigin = Object.freeze({/* origins */})
 
