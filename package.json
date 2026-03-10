@@ -15,7 +15,7 @@
     "./*": "./source/*/index.js"
   },
   "dependencies": {
-    "@shakerquiz/utilities": "4.0.83"
+    "@shakerquiz/utilities": "4.0.84"
   },
   "devDependencies": {
     "@types/bun": "1.3.10",
