@@ -70,6 +70,18 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: process.env.BITRIX_DOCKER_ORIGIN,
     Public: process.env.BITRIX_PUBLIC_ORIGIN,
   }),
+  Vk: Object.freeze({
+    Docker: process.env.VK_DOCKER_ORIGIN,
+    Public: process.env.VK_PUBLIC_ORIGIN,
+  }),
+  Max: Object.freeze({
+    Docker: process.env.MAX_DOCKER_ORIGIN,
+    Public: process.env.MAX_PUBLIC_ORIGIN,
+  }),
+  VkOrganizer: Object.freeze({
+    Docker: process.env.VKORGANIZER_DOCKER_ORIGIN,
+    Public: process.env.VKORGANIZER_PUBLIC_ORIGIN,
+  }),
   Reposter: Object.freeze({
     Docker: process.env.REPOSTER_DOCKER_ORIGIN,
     Public: process.env.REPOSTER_PUBLIC_ORIGIN,

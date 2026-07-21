@@ -70,6 +70,18 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: Bun.env.BITRIX_DOCKER_ORIGIN,
     Public: Bun.env.BITRIX_PUBLIC_ORIGIN,
   }),
+  Vk: Object.freeze({
+    Docker: Bun.env.VK_DOCKER_ORIGIN,
+    Public: Bun.env.VK_PUBLIC_ORIGIN,
+  }),
+  Max: Object.freeze({
+    Docker: Bun.env.MAX_DOCKER_ORIGIN,
+    Public: Bun.env.MAX_PUBLIC_ORIGIN,
+  }),
+  VkOrganizer: Object.freeze({
+    Docker: Bun.env.VKORGANIZER_DOCKER_ORIGIN,
+    Public: Bun.env.VKORGANIZER_PUBLIC_ORIGIN,
+  }),
   Reposter: Object.freeze({
     Docker: Bun.env.REPOSTER_DOCKER_ORIGIN,
     Public: Bun.env.REPOSTER_PUBLIC_ORIGIN,

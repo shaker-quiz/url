@@ -70,6 +70,18 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: import.meta.env.VITE_BITRIX_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_BITRIX_PUBLIC_ORIGIN,
   }),
+  Vk: Object.freeze({
+    Docker: import.meta.env.VITE_VK_DOCKER_ORIGIN,
+    Public: import.meta.env.VITE_VK_PUBLIC_ORIGIN,
+  }),
+  Max: Object.freeze({
+    Docker: import.meta.env.VITE_MAX_DOCKER_ORIGIN,
+    Public: import.meta.env.VITE_MAX_PUBLIC_ORIGIN,
+  }),
+  VkOrganizer: Object.freeze({
+    Docker: import.meta.env.VITE_VKORGANIZER_DOCKER_ORIGIN,
+    Public: import.meta.env.VITE_VKORGANIZER_PUBLIC_ORIGIN,
+  }),
   Reposter: Object.freeze({
     Docker: import.meta.env.VITE_REPOSTER_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_REPOSTER_PUBLIC_ORIGIN,
