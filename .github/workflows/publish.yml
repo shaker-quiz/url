@@ -8,12 +8,12 @@ on:
   workflow_dispatch:
     inputs:
       utilities:
-        description: "Bump @shakerquiz/utilities@aquamarine ?"
+        description: "Bump @shakerquiz/utilities@latest?"
         required: false
         default: false
         type: boolean
       pr:
-        description: "Open PR ?"
+        description: "Open PR?"
         required: false
         default: false
         type: boolean
@@ -35,7 +35,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         with:
           node-version: latest
-      - run: npm i @shakerquiz/utilities@aquamarine --save-exact --prefer-online
+      - run: npm install @shakerquiz/utilities@latest --save-exact --prefer-online
         if: github.event_name == 'workflow_dispatch' && inputs.utilities
       - name: Commit changes
         if: github.event_name == 'workflow_dispatch'
