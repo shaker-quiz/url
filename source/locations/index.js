@@ -1,5 +1,4 @@
 import { hydrateRoutePathname, Network, routeService, Service } from '@shakerquiz/utilities'
-import { getOwn } from '@shakerquiz/utilities/helpers/object'
 
 export const ServiceNetworkOrigin = Object.freeze({
   Users: Object.freeze({
@@ -99,20 +98,29 @@ export const ServiceNetworkOrigin = Object.freeze({
 /**
  * @param {keyof typeof import('@shakerquiz/utilities').Network} maybeNetwork
  * @param {string} maybeRoute
- * @param {any[]} maybeParams
- * @param {ConstructorParameters<typeof URLSearchParams>[0]} maybeSearch
+ * @param {any[]} [maybeParams]
+ * @param {ConstructorParameters<typeof URLSearchParams>[0]} [maybeSearch]
  * @param {keyof typeof import('@shakerquiz/utilities').Service} [maybeService]
  */
 export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeService) => {
   var service = maybeService
-    ? getOwn(Service, maybeService)
+    ? Service[maybeService]
     : routeService(maybeRoute)
 
-  var network = getOwn(Network, maybeNetwork)
+  if (maybeService && !service)
+    throw TypeError(`Service[${maybeService}] must have a value.`)
 
-  var networkOrigin = getOwn(ServiceNetworkOrigin, service)
+  var network = Network[maybeNetwork]
 
-  var origin = getOwn(networkOrigin, network)
+  if (!network)
+    throw TypeError(`Network[${maybeNetwork}] must have a value.`)
+
+  var NetworkOrigin = ServiceNetworkOrigin[service]
+
+  if (!NetworkOrigin)
+    throw TypeError(`ServiceNetworkOrigin[${service}] must have a value.`)
+
+  var origin = NetworkOrigin[network]
 
   if (!URL.canParse(origin))
     throw TypeError(`Origin '${origin}' is not an URL.`)
@@ -123,13 +131,3 @@ export const url = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeSer
 
   return url
 }
-
-/**
- * @param {keyof typeof import('@shakerquiz/utilities').Network} maybeNetwork
- * @param {string} maybeRoute
- * @param {any[]} maybeParams
- * @param {ConstructorParameters<typeof URLSearchParams>[0]} maybeSearch
- * @param {Parameters<typeof fetch>[1]} [maybeInit]
- */
-export const request = (maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeInit) =>
-  fetch(url(maybeNetwork, maybeRoute, maybeParams, maybeSearch, maybeInit?.service), maybeInit)
