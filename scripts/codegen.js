@@ -1,7 +1,6 @@
 import template from './template.js' with { type: 'text' }
 
 import { Networks, ServiceRuntime, Services } from '@shakerquiz/utilities'
-import { getOwn } from '@shakerquiz/utilities/helpers/object'
 
 let Service = service => `${service}: Object.freeze({/* networks */})`
 
@@ -29,9 +28,15 @@ let ServiceNetwork = (runtime, service, network) => {
   }
 }
 
+for (let service of Services)
+  if (!Object.hasOwn(ServiceRuntime, service))
+    throw TypeError(`ServiceRuntime[${service}] must be defined.`)
+  else if (!ServiceRuntime[service])
+    throw TypeError(`ServiceRuntime[${service}] must have a value.`)
+
 Services
-  .map(service => [service, getOwn(ServiceRuntime, service)])
-  .map(([service, runtime]) =>
+  .map(service => [service, ServiceRuntime[service]])
+  .map(({ 0: service, 1: runtime }) =>
     Bun.write(
       `source/${service.toLowerCase()}/index.js`,
       template.replace(
