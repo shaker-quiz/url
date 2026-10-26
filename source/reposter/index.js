@@ -37,6 +37,10 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: process.env.REGISTRATIONS_DOCKER_ORIGIN,
     Public: process.env.REGISTRATIONS_PUBLIC_ORIGIN,
   }),
+  Participants: Object.freeze({
+    Docker: process.env.PARTICIPANTS_DOCKER_ORIGIN,
+    Public: process.env.PARTICIPANTS_PUBLIC_ORIGIN,
+  }),
   Procedures: Object.freeze({
     Docker: process.env.PROCEDURES_DOCKER_ORIGIN,
     Public: process.env.PROCEDURES_PUBLIC_ORIGIN,

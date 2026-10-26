@@ -37,6 +37,10 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: import.meta.env.VITE_REGISTRATIONS_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_REGISTRATIONS_PUBLIC_ORIGIN,
   }),
+  Participants: Object.freeze({
+    Docker: import.meta.env.VITE_PARTICIPANTS_DOCKER_ORIGIN,
+    Public: import.meta.env.VITE_PARTICIPANTS_PUBLIC_ORIGIN,
+  }),
   Procedures: Object.freeze({
     Docker: import.meta.env.VITE_PROCEDURES_DOCKER_ORIGIN,
     Public: import.meta.env.VITE_PROCEDURES_PUBLIC_ORIGIN,

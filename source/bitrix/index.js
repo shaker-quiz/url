@@ -37,6 +37,10 @@ export const ServiceNetworkOrigin = Object.freeze({
     Docker: Bun.env.REGISTRATIONS_DOCKER_ORIGIN,
     Public: Bun.env.REGISTRATIONS_PUBLIC_ORIGIN,
   }),
+  Participants: Object.freeze({
+    Docker: Bun.env.PARTICIPANTS_DOCKER_ORIGIN,
+    Public: Bun.env.PARTICIPANTS_PUBLIC_ORIGIN,
+  }),
   Procedures: Object.freeze({
     Docker: Bun.env.PROCEDURES_DOCKER_ORIGIN,
     Public: Bun.env.PROCEDURES_PUBLIC_ORIGIN,
